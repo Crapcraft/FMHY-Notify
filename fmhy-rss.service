@@ -1,0 +1,29 @@
+# systemd service unit for fmhy-rss-discord
+#
+# Installation:
+#   1. Edit WorkingDirectory and the path in ExecStart to match where you cloned the repo.
+#   2. Edit User to your Linux username.
+#   3. Copy to /etc/systemd/system/fmhy-rss.service
+#   4. sudo systemctl daemon-reload
+#   5. sudo systemctl enable --now fmhy-rss
+#
+# Logs: journalctl -u fmhy-rss -f
+
+[Unit]
+Description=FMHY RSS → Discord webhook bridge
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=YOUR_USERNAME
+WorkingDirectory=/path/to/fmhy-rss-discord
+ExecStart=/usr/bin/node /path/to/fmhy-rss-discord/rss-to-discord.js
+Restart=on-failure
+RestartSec=10
+# The script reads .env from its own directory automatically.
+# Alternatively, set the var directly here:
+# Environment=DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
+
+[Install]
+WantedBy=multi-user.target
