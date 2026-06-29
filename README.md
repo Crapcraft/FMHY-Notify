@@ -1,4 +1,4 @@
-# fmhy-rss-discord
+# FMHY Notify
 
 Polls the [FMHY Tracker](https://fmhy-tracker.pages.dev/) RSS feed and forwards new entries to a Discord channel via webhook. Runs as a lightweight background process — no database, no framework, just Node.js.
 
